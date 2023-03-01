@@ -4,14 +4,18 @@ from ferramentas import *
 def calcularFrequenciaComClasse(amostras:list,classeQuantidade:int)->list[list]:
     '''Este método recebe uma lista contendo extritamente valores numéricos, junto com a quantidade de classes. Em seguida retornará uma tabela de frequência com classes na seguinte ordem: valor amostrado, a frequência absoluta simples e a frequência relativa.
     exemplo de retorno:\n
-    [\n
-        [20 |- 22, 3, 3/7, 3, 3/11],
+    [   
+        \n[20 |- 22, 3, 3/7, 3, 3/11],
         \n[22 |- 24, 1, 1/7, 4, 4/11],
         \n[24 |-|26, 4, 4/7, 11, [11/11]
-    \n]
+    \n
+    ]
     '''
     selectionSort(amostras)
     menorTermo=amostras[0]
+    
+    #maiorTermo=amostras[-1] #!!!!! Não funciona sem ter um acréscimo, pois o último valor será sempre excluído
+    
     acrescimo=((amostras[-1] - menorTermo)/100)
     maiorTermo= (amostras[-1]+ acrescimo)
     intervalo= (maiorTermo - menorTermo)/classeQuantidade
@@ -19,29 +23,25 @@ def calcularFrequenciaComClasse(amostras:list,classeQuantidade:int)->list[list]:
     
     #maiorTermo=amostras[-1]+ (amostras[-1] - amostras[0]) #!!!!! há Chances de um dos 
     # termos serem ignorados
-    print(maiorTermo)
-    print(menorTermo)
-    print(intervalo)
-    
     inicioIntervalo=amostras[0]
     finalIntervalo= inicioIntervalo + intervalo
-    
+
     for i in range(classeQuantidade): 
         tabelaFrequencia.append(__gerarFrequenciaSimples(amostras,inicioIntervalo,finalIntervalo))
         inicioIntervalo=finalIntervalo
         finalIntervalo+= intervalo
-        
     
     calcularFrequenciaAcumulativa(tabelaFrequencia)
     return tabelaFrequencia
     
 def __gerarFrequenciaSimples(array, inicioIntervalo:float, finalIntervalo:float):
-    intervalo=f'{inicioIntervalo:.2f} |- {finalIntervalo:.2f}'
+    intervalo=f'{inicioIntervalo:.3f} |- {finalIntervalo:.3f}'
     
     frequenciaAbsolutaSimples=0
     
     for cursor in array:
         if cursor >= finalIntervalo:
+            #print(f'{cursor}>= {finalIntervalo}')
             break
         elif cursor>= inicioIntervalo:
             frequenciaAbsolutaSimples+=1
@@ -50,13 +50,8 @@ def __gerarFrequenciaSimples(array, inicioIntervalo:float, finalIntervalo:float)
     return [intervalo,frequenciaAbsolutaSimples,frequenciaRelativaSimples]                       
 
 
-array= [6.0, 6.2, 6.7, 6.3, 6.9, 6.3, 7.4, 7.6,
-7.7, 7.6, 7.3, 7.7, 7.6, 7.4, 7.2, 7.2,
-7.3, 7.6, 7.5, 7.4, 7.5, 7.7, 8.2, 8.4,
-8.1, 8.1, 8.1, 7.9, 7.8, 7.4, 7.5, 7.6,
-7.5, 7.6, 7.4, 7.3, 7.4, 7.5, 7.4, 7.5]
+array= [10.2,10.3,10.5,30.5,40.6,23.1,19.4,37.6,23.4,21.5,37.4,34.5]
 
-frequenciaTabela=calcularFrequenciaComClasse(array,6)
+frequenciaTabela=calcularFrequenciaComClasse(array,5)
 
 print(montarTabela(frequenciaTabela))
-
