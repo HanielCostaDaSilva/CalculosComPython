@@ -33,13 +33,13 @@ flag=True #variável responsável pelo laço do algorítimo
 
 while flag:
     try: 
+        dadosFormatados=[]
         print(MostrarOpcoes(opcoesCabiveisDicionario))
-
         escolha=input('Digite a opção que desejas execultar: ')
                         
         if escolha==opcoesCabiveisChaves[0]:#'1':'Gerar tabela de Frequência sem classes'
-            arquivoDadosCaminho= os.path.expanduser('./dadosQuantitativosDiscretos.txt')
-            #arquivoDadosCaminho= 'dadosQuantitativosDiscretos.txt'#os dados serão coletados de um arquivo de texto
+            arquivoDadosCaminho= os.path.expanduser('./dadosTabelaSemClasse.txt')
+            #arquivoDadosCaminho= 'dadosTabelaSemClasse.txt'#os dados serão coletados de um arquivo de texto
             tabelaArquivoCaminho=os.path.expanduser('./tabelaFrequenciaSemClasses.txt')        
             
             print(separador)
@@ -51,12 +51,16 @@ while flag:
             dadosSeparados=dados.readlines()
             dados.close()
             #== == !! !! Criação da tabela
-            tabela= calcularfrequenciaSemClasse(dadosSeparados)
+    
+            for i in dadosSeparados:
+                dadosFormatados.append(i.replace('\n',''))
+            tabela= calcularfrequenciaSemClasse(dadosFormatados)
 
             #== == Geração do arquivo contendo a tabela
             arquivoTabela=open(tabelaArquivoCaminho,'w')
             arquivoTabela.writelines(montarTabelaParaArquivos(tabela))
             arquivoTabela.close()
+            
             
             print(separador)
             print(f'Sua tabela foi gerada com êxito!\nVocê pode acessar através do seguinte caminho: {tabelaArquivoCaminho}')
@@ -65,8 +69,8 @@ while flag:
             input('Aperte "Enter" para continuar')
 
         elif escolha==opcoesCabiveisChaves[1]:#'2':'Gerar tabela de Frequência com classes',
-            arquivoDadosCaminho= os.path.expanduser('./dadosQuantitativosContinuos.txt')
-            #arquivoDadosCaminho= f'dadosQuantitativosContinuos.txt'#os dados serão coletados de um arquivo de texto
+            arquivoDadosCaminho= os.path.expanduser('./dadosTabelaComClasse.txt')
+            #arquivoDadosCaminho= f'dadosTabelaComClasse.txt'#os dados serão coletados de um arquivo de texto
             tabelaArquivoCaminho=os.path.expanduser('./tabelaFrequenciaComClasses.txt')
             print(separador)
             print('Por favor, digite os dados em um arquivo de texto no seguinte caminho: \n',arquivoDadosCaminho)
@@ -78,7 +82,6 @@ while flag:
             dadosSeparados=dados.readlines()
             dados.close()
             
-            dadosFormatados=[]
             for i in dadosSeparados:
                 dadosFormatados.append(float(i))
             

@@ -14,11 +14,9 @@ def calcularfrequenciaSemClasse(ocorrencias:list)->list[list]:
     
     for i in range(len(ocorrencias)):    
         
-        if len(ocorrencias)== i + 1: #O último elemento do ocorrencias é um caso que requer um tratamento diferente. Pois ele não irá acionar a condição anterior
-            frequenciaRelativaSimples= f"{frequenciaTabela[cursor][1]}/{len(ocorrencias)}" 
-            frequenciaTabela[cursor].append(frequenciaRelativaSimples) 
-
-        elif (ocorrencias[i] > frequenciaTabela[cursor][0]): # Verifica se o elemento do ocorrencias não é mais o mesmo do laço passado 
+        '''
+        '''
+        if (ocorrencias[i] > frequenciaTabela[cursor][0]): # Verifica se o elemento do ocorrencias não é mais o mesmo do laço passado 
             
             frequenciaTabela.append([ocorrencias[i],1])# A tabela de frequências irá adicionar, o novo valor na próxima linha.
             
@@ -29,9 +27,22 @@ def calcularfrequenciaSemClasse(ocorrencias:list)->list[list]:
             frequenciaTabela[cursor].append(frequenciaRelativaSimples)     
             
             cursor+=1 # O cursor passará a apontar para este agora
-            
+
         else:
             frequenciaTabela[cursor][1]+=1 #a Tabela irá incrementar 1 na quantidade de elementos desta amostra
+        
+        if len(ocorrencias)== i + 1: #O último elemento do ocorrencias é um caso que requer um tratamento diferente. Pois ele não irá acionar a condição anterior
+            frequenciaRelativaSimples= f"{frequenciaTabela[cursor][1]}/{len(ocorrencias)}" 
+            frequenciaTabela[cursor].append(frequenciaRelativaSimples) 
+            
+            
+            
+        
+    __calcularFrequenciaAcumulativa(frequenciaTabela)#Calculado a frequencia absoluta e relativa simples, devemos agora calcular as Frequencias Acumulativas.
+        
+    return frequenciaTabela
+
+        
             
         
     __calcularFrequenciaAcumulativa(frequenciaTabela)#Calculado a frequencia absoluta e relativa simples, devemos agora calcular as Frequencias Acumulativas.
@@ -87,8 +98,7 @@ def __gerarFrequenciaSimplesComClasses(array, inicioIntervalo:float, finalInterv
 
 
 def montarTabela(Tabela:list[list])->str:
-    s=f'{"Xi":^10}  |  {"fi":>10}  |  {"fri":>10}  |  {"Fi":>10}  |  {"Fri":>10}|\n{"==="*30}\n +-=A+' 
-    
+    s=f'{"Xi":^10}  |  {"fi":>10}  |  {"fri":>10}  |  {"Fi":>10}  |  {"Fri":>10}|\n{"==="*30}\n +-=A+'   
     for linha in Tabela:    
         Xi, fi, fri, Fi, Fri= linha   
         s+=f'{Xi:^10}  |   {fi:^10}  |  {fri:^10}  |  {Fi:^10}  |  {Fri:^10}|\n +-=A+'

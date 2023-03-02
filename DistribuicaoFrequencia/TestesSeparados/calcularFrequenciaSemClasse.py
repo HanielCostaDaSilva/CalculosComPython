@@ -16,11 +16,9 @@ def calcularfrequenciaSemClasse(ocorrencias:list)->list[list]:
     
     for i in range(len(ocorrencias)):    
         
-        if len(ocorrencias)== i + 1: #O último elemento do ocorrencias é um caso que requer um tratamento diferente. Pois ele não irá acionar a condição anterior
-            frequenciaRelativaSimples= f"{frequenciaTabela[cursor][1]}/{len(ocorrencias)}" 
-            frequenciaTabela[cursor].append(frequenciaRelativaSimples) 
-
-        elif (ocorrencias[i] > frequenciaTabela[cursor][0]): # Verifica se o elemento do ocorrencias não é mais o mesmo do laço passado 
+        '''
+        '''
+        if (ocorrencias[i] > frequenciaTabela[cursor][0]): # Verifica se o elemento do ocorrencias não é mais o mesmo do laço passado 
             
             frequenciaTabela.append([ocorrencias[i],1])# A tabela de frequências irá adicionar, o novo valor na próxima linha.
             
@@ -31,9 +29,15 @@ def calcularfrequenciaSemClasse(ocorrencias:list)->list[list]:
             frequenciaTabela[cursor].append(frequenciaRelativaSimples)     
             
             cursor+=1 # O cursor passará a apontar para este agora
-            
+
         else:
             frequenciaTabela[cursor][1]+=1 #a Tabela irá incrementar 1 na quantidade de elementos desta amostra
+        
+        if len(ocorrencias)== i + 1: #O último elemento do ocorrencias é um caso que requer um tratamento diferente. Pois ele não irá acionar a condição anterior
+            frequenciaRelativaSimples= f"{frequenciaTabela[cursor][1]}/{len(ocorrencias)}" 
+            frequenciaTabela[cursor].append(frequenciaRelativaSimples) 
+            
+            
             
         
     calcularFrequenciaAcumulativa(frequenciaTabela)#Calculado a frequencia absoluta e relativa simples, devemos agora calcular as Frequencias Acumulativas.
@@ -41,10 +45,21 @@ def calcularfrequenciaSemClasse(ocorrencias:list)->list[list]:
     return frequenciaTabela
 
         
-array= [10.9,  12.2,  11.7,  12.5,  13.9,  12.3,  14.4,  13.6,  12.7,  12.6, 11.3, 11.7, 12.6, 13.4, 15.2, 13.2, 13.0, 16.9, 15.8, 14.7, 13.5,12.7, 12.3, 13.5, 15.4, 16.3, 15.2, 12.3, 13.7, 14.1 ]
+array= [
+10,
+10,
+10,
+19,
+21,
+23,
+23,
+30,
+37,
+37,
+40
+]
 
 
 frequenciaTabela=calcularfrequenciaSemClasse(array)
-
 
 print(montarTabela(frequenciaTabela))
