@@ -11,22 +11,22 @@ def calcularfrequenciaSemClasse(ocorrencias:list)->list[list]:
     '''
     
     selectionSort(ocorrencias) #primeiro, ordenamos a lista contendo as amostras coletadas
-    frequenciaTabela=[ [ array[0], 0] ] #Em seguida, criamos o array que conterá todos os dados: [Xi, fi]
+    frequenciaTabela=[ [ ocorrencias[0], 0] ] #Em seguida, criamos o ocorrencias que conterá todos os dados: [Xi, fi]
     cursor=0 #O cursor será responsável por apontar a lista que deverá ser adicionado as informações
     
-    for i in range(len(array)):    
+    for i in range(len(ocorrencias)):    
         
-        if len(array)== i + 1: #O último elemento do array é um caso que requer um tratamento diferente. Pois ele não irá acionar a condição anterior
-            frequenciaRelativaSimples= f"{frequenciaTabela[cursor][1]}/{len(array)}" 
+        if len(ocorrencias)== i + 1: #O último elemento do ocorrencias é um caso que requer um tratamento diferente. Pois ele não irá acionar a condição anterior
+            frequenciaRelativaSimples= f"{frequenciaTabela[cursor][1]}/{len(ocorrencias)}" 
             frequenciaTabela[cursor].append(frequenciaRelativaSimples) 
 
-        elif (array[i] > frequenciaTabela[cursor][0]): # Verifica se o elemento do array não é mais o mesmo do laço passado 
+        elif (ocorrencias[i] > frequenciaTabela[cursor][0]): # Verifica se o elemento do ocorrencias não é mais o mesmo do laço passado 
             
-            frequenciaTabela.append([array[i],1])# A tabela de frequências irá adicionar, o novo valor na próxima linha.
+            frequenciaTabela.append([ocorrencias[i],1])# A tabela de frequências irá adicionar, o novo valor na próxima linha.
             
             #antes de ir para próxima linha, será preciso calcular a frequência relativa.
             
-            frequenciaRelativaSimples= f"{frequenciaTabela[cursor][1]}/{len(array)}" #Será entregue uma fração.
+            frequenciaRelativaSimples= f"{frequenciaTabela[cursor][1]}/{len(ocorrencias)}" #Será entregue uma fração.
             
             frequenciaTabela[cursor].append(frequenciaRelativaSimples)     
             

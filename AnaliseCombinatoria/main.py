@@ -2,7 +2,6 @@
 from AnaliseCombinatoria import * 
 import os
 
-
 #== == == == Funções
 def MostrarOpcoes(Dicionario):
     Opcoes= ''
